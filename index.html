@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+
+    <meta charset="utf-8" />
+    <title>Pacman Game</title>
+</head>
+
+<body>
+
+
+<section class="header">
+    <img id="logo" src="files/logo.jpg">
+    <p>Nadav Bar-David 305446866</p>
+    <p>Harel Sasson </p>
+</section>
+
+<section class="navbar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Welcome</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Play</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</section>
+
+<section>
+    <div class="row">
+            <div id="welcome_content" class="content show">
+                <h1>Welcome</h1>
+            </div>
+            <div id="register_content" class="content hide">
+                <h1>Register</h1>
+            </div>
+            <div id="play_content" class="content hide">
+                <h1>Play</h1>
+                <button id="game_test">New Game</button>
+                <div id ="game_board">
+                    SCORE:
+                    <input id="lblScore" type="text"/>
+                    <br/>
+                    TIME:
+                    <input id="lblTime" type="text"/>
+                    <br/>
+                    <img id="arcade_machine" src="files/2.png" alt="arcade_machine">
+                    <canvas id="canvas" height="358" width="441"></canvas>
+                </div>
+            </div>
+            <div id="login_content" class="content hide">
+                <h1>Login</h1>
+            </div>
+            <div id="about_content" class="content hide">
+                <h1>About</h1>
+            </div>
+    </div>
+</section>
+
+<section class="footer">
+
+</section>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="game.js"></script>
+</body>
+
+</html>

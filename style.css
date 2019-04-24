@@ -1,0 +1,72 @@
+ul.nav {
+    position: fixed;
+    width:80%;
+    margin: auto;
+    padding:0;
+    list-style:none;
+    background-color: black;
+    text-align:center;
+    font-family: sans-serif;
+    color: yellow;
+    alignment: center;
+}
+.nav li {
+    display:inline-block;
+    width:10%;
+    margin:0;
+    padding:0;
+}
+
+#logo {
+    max-width:10%;
+    max-height: 10%;
+}
+
+.header {
+    background-color: black;
+    text-align: center;
+    padding: 20px;
+}
+
+.content{
+    margin: auto;
+}
+
+.row {
+    padding: 2.5%;
+}
+
+.show{
+
+}
+
+.hide {
+    display: none;
+}
+
+h1 {
+    text-align: center;
+}
+
+#game_board{
+    width: 900px;
+    height: 430px;
+    position: relative;
+}
+
+#arcade_machine{
+    width: 117%;
+    height: 117%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
+#canvas {
+    width: 484px;
+    height: 390px;
+    position: relative;
+    margin-left: 35%;
+    margin-top: 1%
+}
