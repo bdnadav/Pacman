@@ -4,8 +4,9 @@
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style.css" />
-
     <meta charset="utf-8" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+    <script src="http://malsup.github.com/jquery.form.js"></script>
     <title>Pacman Game</title>
 </head>
 
@@ -52,8 +53,92 @@
             </div>
             <div id="play_content" class="content hide">
                 <h1>Play</h1>
-                <button id="game_test">New Game</button>
-                <div id ="game_board">
+                <div id = "settings">
+                    <form id="settingsForm" >
+                        <h2>Settings Page</h2>
+                        <h4>Game Controls</h4>
+                        <div>
+                            <img id = "img_right" class = "movement_img" src="files/arrow.jpg" alt="right">
+                            <input type="text" id="txt_right" size="40" maxlength="1" placeholder="Click here and press the desire key" onkeydown="setMovementKey(this, event)">
+                            <br>
+                            <br>
+                            <img id = "img_down" class = "movement_img" src="files/arrow.jpg" style="transform:rotate(90deg);" alt="down">
+                            <input type="text" id="txt_down" size="40" maxlength="1" placeholder="Click here and press the desire key" onkeydown="setMovementKey(this, event)">
+                            <br>
+                            <br>
+                            <img id = "img_left" class = "movement_img" src="files/arrow.jpg" style="transform:rotate(180deg);" alt="left">
+                            <input type="text" id="txt_left" size="40" maxlength="1" placeholder="Click here and press the desire key" onkeydown="setMovementKey(this, event)">
+                            <br>
+                            <br>
+                            <img id = "img_up" class = "movement_img" src="files/arrow.jpg" style="transform:rotate(270deg);" alt="up">
+                            <input type="text" id="txt_up" size="40" maxlength="1" placeholder="Click here and press the desire key" onkeydown="setMovementKey(this, event)">
+                        </div>
+
+                        <h4>Amount of soup nuts</h4>
+                        <input type="number" id="input_amount_soup_nuts" min="50" max="90" step="1">
+
+                        <h4>Quality types of soup nuts</h4>
+                        <table style="width:100%">
+                            <tr>
+                                <th>Amount</th>
+                                <th>Type</th>
+                                <th>Color</th>
+                                <th>Points</th>
+                            </tr>
+                            <tr>
+                                <td>60%</td>
+                                <td>Junk</td>
+                                <td>
+                                    <input type="color" id="input_junk_color">
+                                </td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>30%</td>
+                                <td>Solid</td>
+                                <td>
+                                    <input type="color" id="input_solid_color">
+                                </td>
+                                <td>15</td>
+                            </tr>
+                            <tr>
+                                <td>10%</td>
+                                <td>Premium</td>
+                                <td>
+                                    <input type="color" id="input_premium_color">
+                                </td>
+                                <td>25</td>
+                            </tr>
+                        </table>
+
+
+                        <h4>Time limit</h4>
+                        <label for="input_time_limit">In Seconds: </label><input type="number" id="input_time_limit" min="60" step="1" value="90">
+
+                        <h4> Monster Number </h4>
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <label class="form-check-label" for="inlineRadio1">1</label>
+                            </div>
+
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" checked=checked>
+                                <label class="form-check-label" for="inlineRadio2">2</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                                <label class="form-check-label" for="inlineRadio3">3</label>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+                <button id="btn_game_test" onclick="Start()">New Game</button>
+                <button id="btn_random_settings" onclick="set_random_settings()">Set Random</button>
+
+                <div id ="game_board" class="content hide">
                     SCORE:
                     <input id="lblScore" type="text"/>
                     <br/>
@@ -80,6 +165,7 @@
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.1/bootstrap-slider.min.js"></script>
 <script src="game.js"></script>
 </body>
 

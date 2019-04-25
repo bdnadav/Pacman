@@ -44,6 +44,10 @@ ul.nav {
     display: none;
 }
 
+.playContent {
+
+}
+
 h1 {
     text-align: center;
 }
@@ -70,3 +74,14 @@ h1 {
     margin-left: 35%;
     margin-top: 1%
 }
+
+.movement_img {
+    border: solid red 5px;
+    border-radius: 5px;
+}
+
+.confirmed_movement_img {
+    border: solid green 5px;
+    border-radius: 5px;
+}
+
