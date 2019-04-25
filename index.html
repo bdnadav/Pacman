@@ -133,20 +133,24 @@
                         </div>
 
                     </form>
-
+                    <button id="btn_game_test" onclick="Start()">New Game</button>
+                    <button id="btn_random_settings" onclick="set_random_settings()">Set Random</button>
                 </div>
-                <button id="btn_game_test" onclick="Start()">New Game</button>
-                <button id="btn_random_settings" onclick="set_random_settings()">Set Random</button>
-
                 <div id ="game_board" class="content hide">
-                    SCORE:
-                    <input id="lblScore" type="text"/>
+                    <div style="position: relative; z-index: 10">
+                        SCORE:
+                        <input id="lblScore" type="text"/>
+                        <br/>
+                        TIME:
+                        <input id="lblTime" type="text"/>
+                    </div>
                     <br/>
-                    TIME:
-                    <input id="lblTime" type="text"/>
-                    <br/>
-                    <img id="arcade_machine" src="files/2.png" alt="arcade_machine">
-                    <canvas id="canvas" height="358" width="441"></canvas>
+                    <br>
+                    <br>
+                    <div>
+                        <img id="arcade_machine" src="files/2-fixed.png" alt="arcade_machine">
+                        <canvas id="canvas" height="407" width="530"></canvas>
+                    </div>
                 </div>
             </div>
             <div id="login_content" class="content hide">

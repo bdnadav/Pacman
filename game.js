@@ -20,6 +20,11 @@ var solid_color;
 var premium_color;
 
 var monster_amount;
+var arr_dim = 14;
+
+var max_points;
+
+var last_move;
 
 
 $(".nav-item").on("click", function(){
@@ -149,40 +154,56 @@ function Start() {
         monster_amount = Number($(".form-check-input[checked=checked]").attr("value").substring(6));
         return 6;
     }
+
     let res = settingsAreValid();
     console.log(res);
     if  (res !== 6){
         alert("Input invalid. Error: " + res);
         return;
     }
-    else
+    else{
         alert("All good lets start");
+        $("#settings").fadeOut(1000, function(){
+            $("#game_board").css("display", "none").removeClass("hide").fadeIn(1000);
+        })
+    }
 
     board = new Array();
     score = 0;
     pac_color="yellow";
-    var cnt = 100;
-    var food_remain = 50;
+    var cnt = arr_dim*arr_dim;
+    var prem_food_remain = Math.floor(soup_nuts_amount * 0.1);
+    var solid_food_remain = Math.floor(soup_nuts_amount * 0.3);
+    var junk_food_remain = soup_nuts_amount - prem_food_remain - solid_food_remain;
+    max_points = prem_food_remain * 25 + solid_food_remain * 15 + junk_food_remain * 5
+
+
     var pacman_remain = 1;
     start_time= new Date();
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < arr_dim; i++) {
         board[i] = new Array();
         //put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
-        for (var j = 0; j < 10; j++) {
+        for (var j = 0; j < arr_dim; j++) {
             if((i==3 && j==3)||(i==3 && j==4)||(i==3 && j==5)||(i==6 && j==1)||(i==6 && j==2))
             {
                 board[i][j] = 4;
             }
             else{
                 var randomNum = Math.random();
-                if (randomNum <= 1.0 * food_remain / cnt) {
-                    food_remain--;
+                if (randomNum <= 1.0 * junk_food_remain / cnt) {
+                    junk_food_remain--;
                     board[i][j] = 1;
-                } else if (randomNum < 1.0 * (pacman_remain + food_remain) / cnt) {
+                } else if (randomNum <= 1.0 * solid_food_remain / cnt){
+                    solid_food_remain--;
+                    board[i][j] = 2;
+                } else if (randomNum <= 1.0 * prem_food_remain / cnt){
+                    prem_food_remain--;
+                    board[i][j] = 3;
+                } else if (pacman_remain == 1 && randomNum < 1.0 * (pacman_remain + junk_food_remain + solid_food_remain + prem_food_remain) / cnt) {
                     shape.i=i;
                     shape.j=j;
                     pacman_remain--;
-                    board[i][j] = 2;
+                    board[i][j] = 5;
                 } else {
                     board[i][j] = 0;
                 }
@@ -190,10 +211,26 @@ function Start() {
             }
         }
     }
-    while(food_remain>0){
-        var emptyCell = findRandomEmptyCell(board);
-        board[emptyCell[0]][emptyCell[1]] = 1;
-        food_remain--;
+    placeRemainFood("junk_food", junk_food_remain);
+    placeRemainFood("solid_food", solid_food_remain);
+    placeRemainFood("premium_food", prem_food_remain);
+
+    function placeRemainFood(foodType, foodAmount){
+        while(foodAmount>0){
+            var emptyCell = findRandomEmptyCell(board);
+            switch (foodType) {
+                case "junk_food":
+                    board[emptyCell[0]][emptyCell[1]] = 1;
+                    break;
+                case "solid_food":
+                    board[emptyCell[0]][emptyCell[1]] = 2;
+                    break;
+                case "premium_food":
+                    board[emptyCell[0]][emptyCell[1]] = 3;
+                    break;
+            }
+            foodAmount--;
+        }
     }
     keysDown = {};
     addEventListener("keydown", function (e) {
@@ -207,64 +244,81 @@ function Start() {
 
 
 function findRandomEmptyCell(board){
-    var i = Math.floor((Math.random() * 9) + 1);
-    var j = Math.floor((Math.random() * 9) + 1);
+    var i = Math.floor((Math.random() * arr_dim-1) + 1);
+    var j = Math.floor((Math.random() * arr_dim-1) + 1);
     while(board[i][j]!=0)
     {
-        i = Math.floor((Math.random() * 9) + 1);
-        j = Math.floor((Math.random() * 9) + 1);
+        i = Math.floor((Math.random() * arr_dim-1) + 1);
+        j = Math.floor((Math.random() * arr_dim-1) + 1);
     }
     return [i,j];
 }
 
 function GetKeyPressed() {
-    if (keysDown[38]) {
+    if (keysDown[38]) { // up
+        last_move = "up";
         return 1;
     }
-    if (keysDown[40]) {
+    if (keysDown[40]) { // down
+        last_move = "down";
         return 2;
     }
-    if (keysDown[37]) {
+    if (keysDown[37]) { //left
+        last_move = "left";
         return 3;
     }
-    if (keysDown[39]) {
+    if (keysDown[39]) {// right
+        last_move = "right";
         return 4;
     }
 }
 
 function Draw() {
     canvas.width=canvas.width; //clean board
-    // let background = new Image();
-    // background.src = "files/2.png";
-    // background.onload = function(){
-    //     context.drawImage(background,0,0);
-    // }
     lblScore.value = score;
     lblTime.value = time_elapsed;
-    for (var i = 0; i < 10; i++) {
-        for (var j = 0; j < 10; j++) {
+    for (var i = 0; i < arr_dim; i++) {
+        for (var j = 0; j < arr_dim; j++) {
             var center = new Object();
-            center.x = i * 60 + 30;
-            center.y = j * 60 + 30;
-            if (board[i][j] == 2) {
+            center.x = i * 38 + 20;
+            center.y = j * 28 + 20;
+            if (board[i][j] == 5) {
+                // context.save();
+                // if (last_move === "up")
+                //     context.rotate(-90 * Math.PI / 180.0);
+                // else if (last_move === "down")
+                //     context.rotate(90 * Math.PI / 180.0);
+                // else if (last_move ==="left")
+                //     context.rotate(180 * Math.PI / 180.0);
                 context.beginPath();
-                context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+                context.arc(center.x, center.y, 15, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
                 context.lineTo(center.x, center.y);
                 context.fillStyle = pac_color; //color
                 context.fill();
+                // context.restore();
                 context.beginPath();
-                context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
+                context.arc(center.x + 2.5, center.y - 15, 5, 0, 2 * Math.PI); // circle
                 context.fillStyle = "black"; //color
                 context.fill();
             } else if (board[i][j] == 1) {
                 context.beginPath();
-                context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-                context.fillStyle = "black"; //color
+                context.arc(center.x, center.y, 7.5, 0, 2 * Math.PI); // circle
+                context.fillStyle = junk_color; //color
+                context.fill();
+            } else if (board[i][j] == 2) {
+                context.beginPath();
+                context.arc(center.x, center.y, 7.5, 0, 2 * Math.PI); // circle
+                context.fillStyle = solid_color; //color
+                context.fill();
+            } else if (board[i][j] == 3) {
+                context.beginPath();
+                context.arc(center.x, center.y, 7.5, 0, 2 * Math.PI); // circle
+                context.fillStyle = premium_color; //color
                 context.fill();
             }
             else if (board[i][j] == 4) {
                 context.beginPath();
-                context.rect(center.x-30, center.y-30, 60, 60);
+                context.rect(center.x-15, center.y-15, 30, 30);
                 context.fillStyle = "grey"; //color
                 context.fill();
             }
@@ -286,7 +340,7 @@ function UpdatePosition() {
     }
     if(x==2)
     {
-        if(shape.j<9 && board[shape.i][shape.j+1]!=4)
+        if(shape.j<arr_dim-1 && board[shape.i][shape.j+1]!=4)
         {
             shape.j++;
         }
@@ -300,23 +354,31 @@ function UpdatePosition() {
     }
     if(x==4)
     {
-        if(shape.i<9 && board[shape.i+1][shape.j]!=4)
+        if(shape.i<arr_dim-1 && board[shape.i+1][shape.j]!=4)
         {
             shape.i++;
         }
     }
     if(board[shape.i][shape.j]==1)
     {
-        score++;
+        score += 5;
     }
-    board[shape.i][shape.j]=2;
+    if(board[shape.i][shape.j]==2)
+    {
+        score += 15;
+    }
+    if(board[shape.i][shape.j]==3)
+    {
+        score += 25;
+    }
+    board[shape.i][shape.j]=5;
     var currentTime=new Date();
-    time_elapsed=(currentTime-start_time)/1000;
-    if(score>=20&&time_elapsed<=10)
+    time_elapsed= Math.floor(timer - (currentTime-start_time)/1000);
+    if(score>=0.7*max_points && time_elapsed<=10)
     {
         pac_color="green";
     }
-    if(score==50)
+    if(score==max_points)
     {
         window.clearInterval(interval);
         window.alert("Game completed");

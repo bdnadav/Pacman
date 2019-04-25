@@ -68,11 +68,13 @@ h1 {
 
 
 #canvas {
-    width: 484px;
-    height: 390px;
     position: relative;
-    margin-left: 35%;
-    margin-top: 1%
+    margin-left: 29.5%;
+    margin-top: -10.1%;
+    background-color: black;
+    border: solid yellow 14px;
+    border-radius: 24px;
+
 }
 
 .movement_img {
