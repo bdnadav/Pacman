@@ -180,15 +180,22 @@ function Start() {
 
     var pacman_remain = 1;
     start_time= new Date();
+
     for (var i = 0; i < arr_dim; i++) {
         board[i] = new Array();
-        //put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
         for (var j = 0; j < arr_dim; j++) {
-            if((i==3 && j==3)||(i==3 && j==4)||(i==3 && j==5)||(i==6 && j==1)||(i==6 && j==2))
-            {
+            if  (((i == 1 || i == 12)&& (j == 2 || j == 3 || j == 4 || j == 9 || j == 10 )) ||
+                ((i == 2 || i == 11) && (j == 0 || j == 4 || j == 5 || j == 6 || j == 9 || j == 10 || j == 11)) ||
+                ((i == 3 || i == 10) && (j == 6 || j == 11)) ||
+                ((i == 4 || i == 9) && (j == 2 || j == 4 || j == 11)) ||
+                ((i == 5 || i == 8)  && (j == 2 || j == 6 || j == 7 || j == 11)) ||
+                ((i == 6 || i == 7) && (j == 7))
+                )
+
                 board[i][j] = 4;
-            }
+
             else{
+
                 var randomNum = Math.random();
                 if (randomNum <= 1.0 * junk_food_remain / cnt) {
                     junk_food_remain--;
@@ -291,13 +298,13 @@ function Draw() {
                 // else if (last_move ==="left")
                 //     context.rotate(180 * Math.PI / 180.0);
                 context.beginPath();
-                context.arc(center.x, center.y, 15, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+                context.arc(center.x, center.y, 12.5, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
                 context.lineTo(center.x, center.y);
                 context.fillStyle = pac_color; //color
                 context.fill();
                 // context.restore();
                 context.beginPath();
-                context.arc(center.x + 2.5, center.y - 15, 5, 0, 2 * Math.PI); // circle
+                context.arc(center.x + 5, center.y - 7.5, 2.5, 0, 2 * Math.PI); // circle
                 context.fillStyle = "black"; //color
                 context.fill();
             } else if (board[i][j] == 1) {
@@ -318,8 +325,8 @@ function Draw() {
             }
             else if (board[i][j] == 4) {
                 context.beginPath();
-                context.rect(center.x-15, center.y-15, 30, 30);
-                context.fillStyle = "grey"; //color
+                context.rect(center.x-15, center.y-15, 38, 29);
+                context.fillStyle = "blue"; //color
                 context.fill();
             }
         }
