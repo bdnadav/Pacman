@@ -9,14 +9,15 @@ function validate(){
     if ( isRegistered(username , password)){
         alert ("Login successfully");
         loggedUser = username;
-       var val =  document.getElementById("log_show").value
+        $("#login_txt").html(loggedUser + " Is logged");
         // window.location = "success.html"; // Redirecting to other page.
-        let curr_con = document.getElementById("login_content");
-        curr_con.classList.remove("show");
-        curr_con.classList.add("hide");
+        $(".content.show").attr("class", "content hide");
         let con = document.getElementById("welcome_content");
+        $(".active").removeClass("active");
+        $("#welcome_nav").addClass("active");
         con.classList.remove("hide");
         con.classList.add("show");
+
         return false;
     }
     else{
