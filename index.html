@@ -12,11 +12,15 @@
 
 <body>
 
+<script src="register.js">init()</script> // init defualt user
+
+
+
 
 <section class="header">
     <img id="logo" src="files/logo.jpg">
     <p>Nadav Bar-David 305446866</p>
-    <p>Harel Sasson </p>
+    <p>Harel Sasson  302908256</p>
 </section>
 
 <section class="navbar">
@@ -153,8 +157,23 @@
                     </div>
                 </div>
             </div>
+
+
+
             <div id="login_content" class="content hide">
                 <h1>Login</h1>
+                <!-- Include JS File Here -->
+
+                <script src="login.js"></script>
+                <div class="login">
+
+                    <input type="text" placeholder="Username" id="username">
+                    <input type="password" placeholder="password" id="password">
+                    <!--<a href="#" class="forgot">forgot password?</a>-->
+                    <!--<input type="submit" value="Sign In">-->
+                    <input type="button" value="Login" id="submit" onclick="validate()"/>
+                </div>
+                <div class="shadow"></div>
             </div>
             <div id="about_content" class="content hide">
                 <h1>About</h1>
