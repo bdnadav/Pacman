@@ -2,31 +2,38 @@
 // var pass =  "a"
 
 //var dict = new Object();
-
-var dict ={
-    "a": "a"
+var dict = [] ;
+var user ={
+    userName: "a" ,
+    pass : "a" ,
+    name: "" ,
+    email: "" ,
+    date : ""
 };
-
+dict.push(user);
 function init () {
    // dict["a"] = "a" ;
-
+   // dict.push(user);
 }
 
 
 
-function register (){
-
-
-
-
-
+function register (name , username , name , email , date){
+    let user_reg ={
+        userName: name,
+        pass : username ,
+        name: name ,
+        email: email ,
+        date : date
+    };
+    dict.push(user_reg);
 }
 
 function isRegistered( name ,  pass){
 
-    for(var key in dict) {
-        var value = dict[key];
-            if ( key == name && value == pass ) // user exist
+    for( let i=0; i<dict.length; i+=1 ) {
+        //var value = dict[key];
+            if ( dict[i].userName=== name && dict[i].pass === pass ) // user exist
                 return true;
 
 

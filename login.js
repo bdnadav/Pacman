@@ -1,4 +1,5 @@
 var attempt = 3; // Variable to count number of attempts.
+var loggedUser= "not Logged";
 
 
 // Below function Executes on click of login button.
@@ -7,7 +8,15 @@ function validate(){
     var password = document.getElementById("password").value;
     if ( isRegistered(username , password)){
         alert ("Login successfully");
-        window.location = "success.html"; // Redirecting to other page.
+        loggedUser = username;
+       var val =  document.getElementById("log_show").value
+        // window.location = "success.html"; // Redirecting to other page.
+        let curr_con = document.getElementById("login_content");
+        curr_con.classList.remove("show");
+        curr_con.classList.add("hide");
+        let con = document.getElementById("welcome_content");
+        con.classList.remove("hide");
+        con.classList.add("show");
         return false;
     }
     else{
