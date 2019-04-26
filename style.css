@@ -89,9 +89,9 @@ h1 {
 
 /*Login Sec**********************************************************************************/
 /* Bordered form */
-log{
+.log_show{
     /*position: inherit;*/
-    text-align: right;
+    text-align: left;
     color: white;
     /*color: black;*/
     background-color: black;
