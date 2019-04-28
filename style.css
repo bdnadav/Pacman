@@ -69,9 +69,9 @@ h1 {
 #canvas {
     position: relative;
     margin-left: 29.5%;
-    margin-top: -10.1%;
+    margin-top: 4.5%;
     background-color: black;
-    border: solid yellow 14px;
+    border: solid blue 14px;
     border-radius: 24px;
 
 }
@@ -239,4 +239,13 @@ input.valid, textarea.valid{
 .error_show{
     color: red;
     margin-left: 10px;
+}
+
+#game_details{
+    background-color: yellow;
+    color: darkblue;
+    font-family: fantasy;
+}
+#game {
+    margin-left: -5%;
 }
