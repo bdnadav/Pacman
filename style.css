@@ -134,13 +134,13 @@ button:hover {
     background-color: #f44336;
 }
 
-/* Center the avatar image inside this container */
+/* Center the avatar img_female_pacman inside this container */
 .imgcontainer {
     text-align: center;
     margin: 24px 0 12px 0;
 }
 
-/* Avatar image */
+/* Avatar img_female_pacman */
 img.avatar {
     width: 40%;
     border-radius: 50%;
