@@ -9,7 +9,7 @@ var interval_ghost;
 var timer;
 var timeBonusUsed = false;
 var show_time_bonus = false;
-var eating = false;
+var eating = true;
 
 var soup_nuts_amount;
 
@@ -25,7 +25,7 @@ var ghosts = [{color: "#00FFDE", directionX: 0, directionY: 0}, {
 }, {color: "#FFB8DE", directionX: 0, directionY: 13}];
 img_female_pacman = new Image;
 img_female_pacman.src = 'files/mis-pacman.jpg';
-var female_pacman = {image: img_female_pacman, directionX: 0, directionY: 0};
+var female_pacman = {image: img_female_pacman, directionX: -1, directionY: -1};
 img_timer_bonus = new Image;
 img_timer_bonus.src = 'files/timer_bonus_fix.png';
 var timer_bonus = {image: img_timer_bonus, directionX: -1, directionY: -1};
@@ -67,7 +67,7 @@ function Start() {
             $("#game").css("display", "none").removeClass("hide").fadeIn(1000);
         })
     }
-    setTimeout(startgame, 1500);
+    setTimeout(startNewGame, 1500);
 }
 
 function initBoard() {
@@ -137,6 +137,7 @@ function initBoard() {
     placeRemainFood("junk_food", junk_food_remain);
     placeRemainFood("solid_food", solid_food_remain);
     placeRemainFood("premium_food", prem_food_remain);
+
 }
 
 function setFemalePacmanRandomPosition() {
@@ -147,30 +148,29 @@ function setFemalePacmanRandomPosition() {
     female_pacman.directionY = emptyCell[1];
 }
 
-function startgame() {
-
+function startNewGame() {
     score = 0;
-
     start_time = new Date();
-
     initBoard();
-    keysDown = {};
-    addEventListener("keydown", function (e) {
-        keysDown[e.keyCode] = true;
-    }, false);
-    addEventListener("keyup", function (e) {
-        keysDown[e.keyCode] = false;
-    }, false);
-    interval = setInterval(UpdatePosition, 150);
-    // interval_draw = setInterval(Draw, 5);
-    addEventListener('keydown', startGame);
-    setFemalePacmanRandomPosition();
+    Draw();
+    addEventListener('keydown', startRound);
     }
 
 
-    function startGame() {
+    function startRound() {
+        keysDown = {};
+        addEventListener("keydown", function (e) {
+            keysDown[e.keyCode] = true;
+        }, false);
+        addEventListener("keyup", function (e) {
+            keysDown[e.keyCode] = false;
+        }, false);
+        interval = setInterval(UpdatePosition, 150);
         interval_ghost = setInterval(updateCharactersPositions, 350);
-        removeEventListener('keydown', startGame);
+        if (show_female){
+            setFemalePacmanRandomPosition();
+        }
+        removeEventListener('keydown', startRound);
     }
 
 
@@ -181,6 +181,38 @@ function startgame() {
         })
         return false;
     }
+
+    function initNewGame(){
+        score = 0;
+        start_time = new Date();
+        initBoard();
+        setFemalePacmanRandomPosition();
+        Draw();
+        addEventListener('keydown', startRound);
+    }
+
+function initNewRoundBoard(board) {
+
+
+}
+
+function initNewRound(){
+
+        initNewRoundBoard(board);
+        ghosts[0].directionX = 0;
+        ghosts[0].directionY = 0;
+        ghosts[1].directionX = 0;
+        ghosts[1].directionY = 13;
+        ghosts[2].directionX = 13;
+        ghosts[2].directionY = 0;
+        let emptyCell = findRandomEmptyCell(board);
+        while (characterInCell(emptyCell[0], emptyCell[1]))
+            emptyCell = findRandomEmptyCell(board);
+        shape.directionX = emptyCell[0];
+        shape.directionY = emptyCell[1];
+        Draw();
+        addEventListener('keydown', startRound);
+}
 
 
     function findRandomEmptyCell(board) {
@@ -216,60 +248,103 @@ function startgame() {
         }
     }
 
+function drawGhosts() {
+    let left;
+    for (let i = 0; i < monster_amount; i++) {
+        var s = 30,
+            top = (ghosts[i].directionY) * 28 + 3.5;
+        left = (ghosts[i].directionX) * 38 + 4.5;
+        var tl = left + s + 10;
+        var base = top + s;
+        var inc = s / 10;
+        context.fillStyle = ghosts[i].color; //color
+        context.beginPath();
 
-    function Draw() {
+        context.moveTo(left, base);
+
+        context.quadraticCurveTo(left, top, left + (s / 2), top);
+        context.quadraticCurveTo(left + s, top, left + s, base);
+
+        // Wavy things at the bottom
+        context.quadraticCurveTo(tl - (inc * 1), base, tl - (inc * 2), base);
+        context.quadraticCurveTo(tl - (inc * 3), base, tl - (inc * 4), base);
+        context.quadraticCurveTo(tl - (inc * 5), base, tl - (inc * 6), base);
+        context.quadraticCurveTo(tl - (inc * 7), base, tl - (inc * 8), base);
+        context.quadraticCurveTo(tl - (inc * 9), base, tl - (inc * 10), base);
+
+        context.closePath();
+        context.fill();
+
+        context.beginPath();
+        context.fillStyle = "#FFF";
+        context.arc(left + 6, top + 6, s / 6, 0, 300, false);
+        context.arc((left + s) - 6, top + 6, s / 6, 0, 300, false);
+        context.closePath();
+        context.fill();
+
+    }
+    if (show_female) {
+        let center = new Object();
+        center.x = female_pacman.directionX * 38 + 10;
+        center.y = female_pacman.directionY * 28;
+        context.drawImage(female_pacman.image, center.x, center.y, 30, 30);
+    }
+    if (show_time_bonus){
+        let center = new Object();
+        center.x = timer_bonus.directionX * 38;
+        center.y = timer_bonus.directionY * 28;
+        context.drawImage(timer_bonus.image, center.x, center.y, 30, 30);
+    }
+}
+
+function drawPacman(center) {
+    context.beginPath();
+    if (eating){
+        context.arc(center.x, center.y, 12.5, 0, 1.9 * Math.PI); // half circle - up
+    }
+    else {
+        switch (last_move) {
+            case "up":
+                context.arc(center.x, center.y, 12.5, 1.65 * Math.PI, 1.35 * Math.PI); // half circle - up
+                break;
+            case "right":
+                context.arc(center.x, center.y, 12.5, 0.15 * Math.PI, 1.85 * Math.PI); // half circle - right
+                break;
+            case "down":
+                context.arc(center.x, center.y, 12.5, 0.65 * Math.PI, 0.35 * Math.PI); // half circle - down
+                break;
+            case "left":
+                context.arc(center.x, center.y, 12.5, 1.15 * Math.PI, 0.85 * Math.PI); // half circle - left
+                break;
+        }
+    }
+    context.lineTo(center.x, center.y);
+    context.fillStyle = pac_color; //color
+    context.fill();
+    context.beginPath();
+    switch (last_move) {
+        case "up":
+            context.arc(center.x + 7, center.y - 5, 2.5, 0, 2 * Math.PI); // circle
+            break;
+        case "right":
+            context.arc(center.x + 7, center.y - 5, 2.5, 0, 2 * Math.PI); // circle
+            break;
+        case "down":
+            context.arc(center.x + 7, center.y - 5, 2.5, 0, 2 * Math.PI); // circle
+            break;
+        case "left":
+            context.arc(center.x + 7, center.y - 5, 2.5, 0, 2 * Math.PI); // circle
+            break;
+    }
+    context.fillStyle = "black"; //color
+    context.fill();
+}
+
+function Draw() {
         canvas.width = canvas.width; //clean board
         lblScore.value = score;
         lblTime.value = time_elapsed;
 
-        function drawGhosts() {
-            let left;
-            for (let i = 0; i < monster_amount; i++) {
-                var s = 30,
-                    top = (ghosts[i].directionY) * 28 + 3.5;
-                left = (ghosts[i].directionX) * 38 + 4.5;
-                var tl = left + s + 10;
-                var base = top + s;
-                var inc = s / 10;
-                context.fillStyle = ghosts[i].color; //color
-                context.beginPath();
-
-                context.moveTo(left, base);
-
-                context.quadraticCurveTo(left, top, left + (s / 2), top);
-                context.quadraticCurveTo(left + s, top, left + s, base);
-
-                // Wavy things at the bottom
-                context.quadraticCurveTo(tl - (inc * 1), base, tl - (inc * 2), base);
-                context.quadraticCurveTo(tl - (inc * 3), base, tl - (inc * 4), base);
-                context.quadraticCurveTo(tl - (inc * 5), base, tl - (inc * 6), base);
-                context.quadraticCurveTo(tl - (inc * 7), base, tl - (inc * 8), base);
-                context.quadraticCurveTo(tl - (inc * 9), base, tl - (inc * 10), base);
-
-                context.closePath();
-                context.fill();
-
-                context.beginPath();
-                context.fillStyle = "#FFF";
-                context.arc(left + 6, top + 6, s / 6, 0, 300, false);
-                context.arc((left + s) - 6, top + 6, s / 6, 0, 300, false);
-                context.closePath();
-                context.fill();
-
-            }
-            if (show_female) {
-                let center = new Object();
-                center.x = female_pacman.directionX * 38 + 10;
-                center.y = female_pacman.directionY * 28;
-                context.drawImage(female_pacman.image, center.x, center.y, 30, 30);
-            }
-            if (show_time_bonus){
-                let center = new Object();
-                center.x = timer_bonus.directionX * 38;
-                center.y = timer_bonus.directionY * 28;
-                context.drawImage(timer_bonus.image, center.x, center.y, 30, 30);
-            }
-        }
 
         for (var i = 0; i < arr_dim; i++) {
             for (var j = 0; j < arr_dim; j++) {
@@ -277,46 +352,7 @@ function startgame() {
                 center.x = i * 38 + 20;
                 center.y = j * 28 + 20;
                 if (board[i][j] == 5) {
-                    context.beginPath();
-                    if (eating){
-                        context.arc(center.x, center.y, 12.5, 0, 1.9 * Math.PI); // half circle - up
-                    }
-                    else {
-                        switch (last_move) {
-                            case "up":
-                                context.arc(center.x, center.y, 12.5, 1.65 * Math.PI, 1.35 * Math.PI); // half circle - up
-                                break;
-                            case "right":
-                                context.arc(center.x, center.y, 12.5, 0.15 * Math.PI, 1.85 * Math.PI); // half circle - right
-                                break;
-                            case "down":
-                                context.arc(center.x, center.y, 12.5, 0.65 * Math.PI, 0.35 * Math.PI); // half circle - down
-                                break;
-                            case "left":
-                                context.arc(center.x, center.y, 12.5, 1.15 * Math.PI, 0.85 * Math.PI); // half circle - left
-                                break;
-                        }
-                    }
-                    context.lineTo(center.x, center.y);
-                    context.fillStyle = pac_color; //color
-                    context.fill();
-                    context.beginPath();
-                    switch (last_move) {
-                        case "up":
-                            context.arc(center.x + 7, center.y - 5, 2.5, 0, 2 * Math.PI); // circle
-                            break;
-                        case "right":
-                            context.arc(center.x + 7, center.y - 5, 2.5, 0, 2 * Math.PI); // circle
-                            break;
-                        case "down":
-                            context.arc(center.x + 7, center.y - 5, 2.5, 0, 2 * Math.PI); // circle
-                            break;
-                        case "left":
-                            context.arc(center.x + 7, center.y - 5, 2.5, 0, 2 * Math.PI); // circle
-                            break;
-                    }
-                    context.fillStyle = "black"; //color
-                    context.fill();
+                    drawPacman(center);
                 } else if (ghostInCell(i, j)) {
                     context.beginPath();
                     context.arc(center.x, center.y, 12.5, 0.15 * Math.PI, 2 * Math.PI);
@@ -470,6 +506,8 @@ function startgame() {
             timer_bonus.directionX = nextRandomCell.x;
             timer_bonus.directionY = nextRandomCell.y;
         }
+        var currentTime = new Date();
+        time_elapsed = Math.floor(timer - (currentTime - start_time) / 1000);
     }
 
     function UpdatePosition() {
@@ -484,8 +522,8 @@ function startgame() {
                 window.alert("Game Over, But you still have live to try again");
                 window.clearInterval(interval);
                 window.clearInterval(interval_ghost);
-
-                resetGame();
+                initNewRound();
+               // resetGame();
                 return;
             }
 
@@ -537,8 +575,6 @@ function startgame() {
             score += 25;
         }
         board[shape.i][shape.j] = 5;
-        var currentTime = new Date();
-        time_elapsed = Math.floor(timer - (currentTime - start_time) / 1000);
         if ((time_elapsed <= 0.6 * $("#input_time_limit").val()) && !timeBonusUsed) {
             timeBonusUsed = true;
             show_time_bonus = true;

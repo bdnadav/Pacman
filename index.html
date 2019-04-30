@@ -73,19 +73,24 @@
                         <p>Please fill in this form to create an account.</p>
                         <hr>
                         <label for="username_field"><b>UserName</b></label>
-                        <input type="text" placeholder="Enter User Name" id="username_field" name="usrname" required>
+                        <input type="text" placeholder="Enter User Name" id="username_field" name="username" required>
+                        <span class="error">This field is required</span>
 
                         <label for="psw_field"><b>Password</b></label>
                         <input type="password" placeholder="Enter Password" id="psw_field" name="psw" required>
+                        <span class="error">This field is required</span>
 
                         <label for="name_field"><b>Name</b></label>
                         <input type="text" placeholder="Enter Name" id="name_field" name="name" required>
+                        <span class="error">This field is required</span>
 
                         <label for="lastname_field"><b>LastName</b></label>
                         <input type="text" placeholder="Enter Last Name" id="lastname_field"  name="lastname" required>
+                        <span class="error">This field is required</span>
 
                         <label for="email_field"><b>Email</b></label>
                         <input type="text" placeholder="Enter Email" id="email_field" name="email" required>
+                        <span class="error">This field is required</span>
 
                         <label for="date"><b>Date</b></label>
                         <select type="day"  name="day" required>
@@ -94,8 +99,8 @@
                         <select type="month"  name="month" required>
                             <option value = "month">Month</option>
                         </select>
-                        <select type="year"  name="month" required>
-                            <option value = "month">Year</option>
+                        <select type="year"  name="year" required>
+                            <option value = "year">Year</option>
                         </select>
 
 
