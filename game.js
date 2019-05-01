@@ -67,7 +67,7 @@ function Start() {
             $("#game").css("display", "none").removeClass("hide").fadeIn(1000);
         })
     }
-    setTimeout(startgame, 1500);
+    setTimeout(initNewGame, 1500);
 }
 
 function initBoard() {
@@ -147,7 +147,7 @@ function setFemalePacmanRandomPosition() {
     female_pacman.directionY = emptyCell[1];
 }
 
-function startgame() {
+function  initNewGame() {
 
     score = 0;
 
@@ -169,8 +169,9 @@ function startgame() {
 
 
     function startGame() {
-        interval_ghost = setInterval(updateCharactersPositions, 350);
         removeEventListener('keydown', startGame);
+        interval_ghost = setInterval(updateCharactersPositions, 350);
+        interval = setInterval(UpdatePosition, 150);
     }
 
 
@@ -364,18 +365,28 @@ function startgame() {
         for (let i = 0; i < 14; i++) {
             board[i] = new Array(14);
         }
+        show_female = true;
+        timer_bonus.directionX = -1;
+        timer_bonus.directionY = -1;
+        show_time_bonus = false;
+        timeBonusUsed = false;
+        newRound();
+    }
+
+    function newRound(){
         ghosts[0].directionX = 0;
         ghosts[0].directionY = 0;
         ghosts[1].directionX = 0;
         ghosts[1].directionY = 13;
         ghosts[2].directionX = 13;
         ghosts[2].directionY = 0;
-        show_female = true;
-        timer_bonus.directionX = -1;
-        timer_bonus.directionY = -1;
-        show_time_bonus = false;
-        timeBonusUsed = false;
-        Start();
+        let emptyCell = findRandomEmptyCell(board);
+        while(!isFreeCell(emptyCell[0], emptyCell[1]))
+            emptyCell = findRandomEmptyCell(board);
+        shape.directionX = emptyCell[0];
+        shape.directionY = emptyCell[1];
+        startGame()
+
     }
 
     function characterInCell(x, y) {
@@ -484,8 +495,8 @@ function startgame() {
                 window.alert("Game Over, But you still have live to try again");
                 window.clearInterval(interval);
                 window.clearInterval(interval_ghost);
-
-                resetGame();
+                addEventListener('keydown', startGame);
+                newRound();
                 return;
             }
 
