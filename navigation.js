@@ -21,3 +21,21 @@ $(".nav-item").on("click", function () {
     con.classList.remove("hide");
     con.classList.add("show");
 });
+
+function navigateToRegister(){
+    $(".active").removeClass("active");
+    $("#register_nav").addClass("active");
+    $(".content.show").attr("class", "content hide");
+    let con = $("#register_content");
+    con.removeClass("hide");
+    con.addClass("show");
+}
+
+function navigateToLogin(){
+    $(".active").removeClass("active");
+    $("#login_nav").addClass("active");
+    $(".content.show").attr("class", "content hide");
+    let con = $("#login_content");
+    con.removeClass("hide");
+    con.addClass("show");
+}

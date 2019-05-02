@@ -10,6 +10,8 @@ function validate(){
         alert ("Login successfully");
         loggedUser = username;
         $("#login_txt").html(loggedUser + " Is logged");
+        $("#player_name").html("PLAYER:"+loggedUser);
+
         // window.location = "success.html"; // Redirecting to other page.
         $(".content.show").attr("class", "content hide");
         let con = document.getElementById("welcome_content");
@@ -17,7 +19,6 @@ function validate(){
         $("#welcome_nav").addClass("active");
         con.classList.remove("hide");
         con.classList.add("show");
-
         return false;
     }
     else{

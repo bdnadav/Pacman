@@ -14,7 +14,7 @@ $("#input_time_limit").on("keydown", function () {
 
 
 function setMovementKey(ele, event) {
-    let key = event.key;
+    let key = event.keyCode;
     let movementDir = ele.id.substring(ele.id.indexOf("_")+1);
     if (confirm("Are you sure" + key)){
         ele.value = "Key choose: " + key;
@@ -38,15 +38,23 @@ function setMovementKey(ele, event) {
 
 function set_random_settings(){
     /* Setting movement default controls */
+    if(left_move_key === undefined){
+        left_move_key = 37;
+        $("#txt_left").attr("value", "Key choose: Arrow Left");
+    }
+    if (up_move_key === undefined){
+        up_move_key = 38;
+        $("#txt_up").attr("value", "Key choose: Arrow Up");
+    }
+    if (right_move_key === undefined){
+        right_move_key = 39;
+        $("#txt_right").attr("value", "Key choose: Arrow Right");
+    }
+    if (down_move_key === undefined){
+        down_move_key = 40;
+        $("#txt_down").attr("value", "Key choose: Arrow Down");
+    }
 
-    left_move_key = 37;
-    up_move_key = 38;
-    right_move_key = 39;
-    down_move_key = 40;
-    $("#txt_right").attr("value", "Key choose: Arrow Right");
-    $("#txt_down").attr("value", "Key choose: Arrow Down");
-    $("#txt_left").attr("value", "Key choose: Arrow Left");
-    $("#txt_up").attr("value", "Key choose: Arrow Up");
     $(".movement_img").addClass("confirmed_movement_img");
 
     $("#input_amount_soup_nuts").attr("value", Math.floor(Math.random()*(90-50+1)+50));
@@ -58,6 +66,8 @@ function set_random_settings(){
 
     $("#input_time_limit").attr("value", Math.floor(Math.random()*(300-60+1)+60));
 
+    let rand_num_of_monster = Math.floor(Math.random()*(3))
+    $(".form-check-input")[rand_num_of_monster].checked = true;
 
 }
 
@@ -84,9 +94,9 @@ function settingsAreValid() {
         return 3; // "Error please select valid amount of soup nuts between 50 to 90
     }
     soup_nuts_amount = tmp_amount;
-    let tmp_junk_color = $("#input_junk_color").attr("value");
-    let tmp_solid_color = $("#input_solid_color").attr("value")
-    let tmp_premium_color = $("#input_premium_color").attr("value")
+    let tmp_junk_color = $("#input_junk_color").val();
+    let tmp_solid_color = $("#input_solid_color").val();
+    let tmp_premium_color = $("#input_premium_color").val();
     if (tmp_junk_color === tmp_solid_color || tmp_junk_color === tmp_premium_color ||
         tmp_solid_color === tmp_premium_color)
         return 4; // "Error: Please choose different colors to the soup nuts"
@@ -97,6 +107,7 @@ function settingsAreValid() {
     if (tmp_seconds === undefined || tmp_seconds < 60 || tmp_seconds > 300)
         return 5; // "Error Please use the arrows to select a number between 60 to 300 seconds"
     timer = tmp_seconds;
-    monster_amount = Number($(".form-check-input[checked=checked]").attr("value").substring(6));
+    $(".form-check-input[checked=true]")
+    monster_amount = Number($(".form-check-input:checked").attr("id").slice(11));
     return 6;
 }
