@@ -2,9 +2,10 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <meta charset="utf-8"/>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
     <script src="http://malsup.github.com/jquery.form.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
@@ -19,18 +20,14 @@
 <body>
 
 
-
-
-
 <section class="header">
     <img id="logo" src="files/logo.jpg">
-    <p>Nadav Bar-David 305446866</p>
-    <p>Harel Sasson  302908256</p>
+    <br>
+    <p style="font-family: 'Lobster', sans-serif; color: wheat; line-height: 23px; margin-bottom: 0px">Nadav Bar-David | 305446866<br>Harel Sasson | 302908256</p>
 </section>
 <section class="log_show">
-    <log id="login_txt"> not Logged </log>
+    <log id="login_txt" style="margin-left: 1%;">Guest(Not Logged)</log>
 </section>
-
 
 
 <section class="navbar">
@@ -57,258 +54,278 @@
     </nav>
 </section>
 
-<section>
+<section id="section_contents">
     <div class="row" style="margin-left: 0px; margin-right:0px;">
-            <div id="welcome_content" class="content show">
-                <h1>Welcome</h1>
-                <hr>
-                <button type="submit" id="btn_nav_to_register" onclick="navigateToRegister()">Register</button>
-                <hr>
-                <button type="submit" id="btn_nav_to_login" onclick="navigateToLogin()"/>Login</button>
-            </div>
-            <div id="register_content" class="content hide">
-                <h1>Register</h1>
-                <form id="reg_contact" methode="post" action="">
-                    <div class="container">
-                        <p>Please fill in this form to create an account.</p>
-                        <hr>
-                        <label for="username_field"><b>UserName</b></label>
-                        <input type="text" placeholder="Enter User Name" id="username_field" name="username" required>
-                        <span class="error">This field is required</span>
+        <div id="welcome_content" class="content show">
+            <h1>Welcome</h1>
+            <hr>
+            <button type="submit" id="btn_nav_to_register" onclick="navigateToRegister()">Register</button>
+            <hr>
+            <button type="submit" id="btn_nav_to_login" onclick="navigateToLogin()"/>
+            Login</button>
+        </div>
+        <div id="register_content" class="content hide">
+            <h1>Register</h1>
+            <form id="reg_contact" methode="post" action="">
+                <div class="container">
+                    <p>Please fill in this form to create an account.</p>
+                    <hr>
+                    <label for="username_field"><b>UserName</b></label>
+                    <input type="text" placeholder="Enter User Name" id="username_field" name="username" required>
+                    <span class="error">This field is required</span>
 
-                        <label for="psw_field"><b>Password</b></label>
-                        <input type="password" placeholder="Enter Password" id="psw_field" name="psw" required>
-                        <span class="error">This field is required</span>
+                    <label for="psw_field"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" id="psw_field" name="psw" required>
+                    <span class="error">This field is required</span>
 
-                        <label for="name_field"><b>Name</b></label>
-                        <input type="text" placeholder="Enter Name" id="name_field" name="name" required>
-                        <span class="error">This field is required</span>
+                    <label for="name_field"><b>Name</b></label>
+                    <input type="text" placeholder="Enter Name" id="name_field" name="name" required>
+                    <span class="error">This field is required</span>
 
-                        <label for="lastname_field"><b>LastName</b></label>
-                        <input type="text" placeholder="Enter Last Name" id="lastname_field"  name="lastname" required>
-                        <span class="error">This field is required</span>
+                    <label for="lastname_field"><b>LastName</b></label>
+                    <input type="text" placeholder="Enter Last Name" id="lastname_field" name="lastname" required>
+                    <span class="error">This field is required</span>
 
-                        <label for="email_field"><b>Email</b></label>
-                        <input type="text" placeholder="Enter Email" id="email_field" name="email" required>
-                        <span class="error">This field is required</span>
+                    <label for="email_field"><b>Email</b></label>
+                    <input type="text" placeholder="Enter Email" id="email_field" name="email" required>
+                    <span class="error">This field is required</span>
 
-                        <label for="date"><b>Date</b></label>
-                        <select type="day"  name="day" required>
-                        <option value = "month">Day</option>
+                    <label for="date"><b>Date</b></label>
+                    <select type="day" name="day" required>
+                        <option value="month">Day</option>
                     </select>
-                        <select type="month"  name="month" required>
-                            <option value = "month">Month</option>
-                        </select>
-                        <select type="year"  name="year" required>
-                            <option value = "year">Year</option>
-                        </select>
+                    <select type="month" name="month" required>
+                        <option value="month">Month</option>
+                    </select>
+                    <select type="year" name="year" required>
+                        <option value="year">Year</option>
+                    </select>
 
 
-
-                        <hr>
-                        <!--<p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>-->
-                        <div id="register_btn">
-                        <button type="submit" class="registerbtn" >Register</button>
-                        </div>
+                    <hr>
+                    <!--<p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>-->
+                    <div id="register_btn">
+                        <button type="submit" class="registerbtn">Register</button>
                     </div>
-
-                    <div class="container signin">
-                        <!--<p>Already have an account? <a href="#">Sign in</a>.</p>-->
-                    </div>
-                </form>
-            </div>
-
-
-            <div id="play_content" class="content hide">
-                <h1>Play</h1>
-                <div id = "settings">
-                    <form id="settingsForm" >
-                        <h2>Settings Page</h2>
-                        <h4>Game Controls</h4>
-                        <div>
-                            <img id = "img_right" class = "movement_img" src="files/arrow.jpg" alt="right">
-                            <input type="text" id="txt_right" size="40" maxlength="1" placeholder="Click here and press the desire key" onkeydown="setMovementKey(this, event)">
-                            <br>
-                            <br>
-                            <img id = "img_down" class = "movement_img" src="files/arrow.jpg" style="transform:rotate(90deg);" alt="down">
-                            <input type="text" id="txt_down" size="40" maxlength="1" placeholder="Click here and press the desire key" onkeydown="setMovementKey(this, event)">
-                            <br>
-                            <br>
-                            <img id = "img_left" class = "movement_img" src="files/arrow.jpg" style="transform:rotate(180deg);" alt="left">
-                            <input type="text" id="txt_left" size="40" maxlength="1" placeholder="Click here and press the desire key" onkeydown="setMovementKey(this, event)">
-                            <br>
-                            <br>
-                            <img id = "img_up" class = "movement_img" src="files/arrow.jpg" style="transform:rotate(270deg);" alt="up">
-                            <input type="text" id="txt_up" size="40" maxlength="1" placeholder="Click here and press the desire key" onkeydown="setMovementKey(this, event)">
-                        </div>
-
-                        <h4>Amount of soup nuts</h4>
-                        <input type="number" id="input_amount_soup_nuts" min="50" max="90" step="1">
-
-                        <h4>Quality types of soup nuts</h4>
-                        <table style="width:100%">
-                            <tr>
-                                <th>Amount</th>
-                                <th>Type</th>
-                                <th>Color</th>
-                                <th>Points</th>
-                            </tr>
-                            <tr>
-                                <td>60%</td>
-                                <td>Junk</td>
-                                <td>
-                                    <input type="color" id="input_junk_color">
-                                </td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <td>30%</td>
-                                <td>Solid</td>
-                                <td>
-                                    <input type="color" id="input_solid_color">
-                                </td>
-                                <td>15</td>
-                            </tr>
-                            <tr>
-                                <td>10%</td>
-                                <td>Premium</td>
-                                <td>
-                                    <input type="color" id="input_premium_color">
-                                </td>
-                                <td>25</td>
-                            </tr>
-                        </table>
-
-
-                        <h4>Time limit</h4>
-                        <label for="input_time_limit">In Seconds: </label><input type="number" id="input_time_limit" min="60" step="1" value="90">
-
-                        <h4> Monster Number </h4>
-                        <div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                <label class="form-check-label" for="inlineRadio1">1</label>
-                            </div>
-
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                <label class="form-check-label" for="inlineRadio2">2</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
-                                <label class="form-check-label" for="inlineRadio3">3</label>
-                            </div>
-                        </div>
-
-                    </form>
-                    <button id="btn_game_test" onclick="Start()">New Game</button>
-                    <button id="btn_random_settings" onclick="set_random_settings()">Set Random</button>
                 </div>
-                <div id="game" class="content hide">
-                    <table>
+
+                <div class="container signin">
+                    <!--<p>Already have an account? <a href="#">Sign in</a>.</p>-->
+                </div>
+            </form>
+        </div>
+        <div id="play_content" class="content hide">
+            <h1>Play</h1>
+            <div id="settings">
+                <form id="settingsForm">
+                    <h2>Settings Page</h2>
+                    <h4>Game Controls</h4>
+                    <div>
+                        <img id="img_right" class="movement_img" src="files/arrow.jpg" alt="right">
+                        <input type="text" id="txt_right" size="40" maxlength="1"
+                               placeholder="Click here and press the desire key"
+                               onkeydown="setMovementKey(this, event)">
+                        <br>
+                        <br>
+                        <img id="img_down" class="movement_img" src="files/arrow.jpg" style="transform:rotate(90deg);"
+                             alt="down">
+                        <input type="text" id="txt_down" size="40" maxlength="1"
+                               placeholder="Click here and press the desire key"
+                               onkeydown="setMovementKey(this, event)">
+                        <br>
+                        <br>
+                        <img id="img_left" class="movement_img" src="files/arrow.jpg" style="transform:rotate(180deg);"
+                             alt="left">
+                        <input type="text" id="txt_left" size="40" maxlength="1"
+                               placeholder="Click here and press the desire key"
+                               onkeydown="setMovementKey(this, event)">
+                        <br>
+                        <br>
+                        <img id="img_up" class="movement_img" src="files/arrow.jpg" style="transform:rotate(270deg);"
+                             alt="up">
+                        <input type="text" id="txt_up" size="40" maxlength="1"
+                               placeholder="Click here and press the desire key"
+                               onkeydown="setMovementKey(this, event)">
+                    </div>
+
+                    <h4>Amount of soup nuts</h4>
+                    <input type="number" id="input_amount_soup_nuts" min="50" max="90" step="1">
+
+                    <h4>Quality types of soup nuts</h4>
+                    <table style="width:100%">
                         <tr>
-                            <td style="width:12%;">
-                                <div id="game_details">
-                                    <table>
-                                        <tr>
-                                            <td id="player_name">
-                                                PLAYER:
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                LIVES
-                                            </td>
-                                            <td id="lives">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                SCORE
-                                            </td>
-                                            <td>
-                                                <input id="lblScore" type="text" style="display: inline-block"/>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                TIME
-                                            </td>
-                                            <td>
-                                                <input id="lblTime" type="text" style="display: inline-block"/>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </td>
+                            <th>Amount</th>
+                            <th>Type</th>
+                            <th>Color</th>
+                            <th>Points</th>
+                        </tr>
+                        <tr>
+                            <td>60%</td>
+                            <td>Junk</td>
                             <td>
-                                <div id ="game_board">
-                                    <img id="arcade_machine" src="files/2-fixed.png" alt="arcade_machine">
-                                    <div class="onArcadeMachine">
-                                        <button type="button" id="btn_new_game" class="btn btn-primary" onclick="newGameBtnClicked()">New Game</button>
-                                        <div id="sound_div">
-                                            <video id="music_video" >
-                                                <source src="files/output.mp4" type="video/mp4">
-                                            </video>
-                                            <!--<button type="button" id="mute_music" onclick="muteMusic()">Mute</button>-->
-                                            <!--<img id="img_music_muted" class="sound_content" src="files/music_static_pic.png">-->
-                                        </div>
-                                        <canvas id="canvas" height="407" width="530"></canvas>
-                                    </div>
-                                </div>
+                                <input type="color" id="input_junk_color">
                             </td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>30%</td>
+                            <td>Solid</td>
+                            <td>
+                                <input type="color" id="input_solid_color">
+                            </td>
+                            <td>15</td>
+                        </tr>
+                        <tr>
+                            <td>10%</td>
+                            <td>Premium</td>
+                            <td>
+                                <input type="color" id="input_premium_color">
+                            </td>
+                            <td>25</td>
                         </tr>
                     </table>
-                </div>
-            </div>
 
 
+                    <h4>Time limit</h4>
+                    <label for="input_time_limit">In Seconds: </label><input type="number" id="input_time_limit"
+                                                                             min="60" step="1" value="90">
 
-            <div id="login_content" class="content hide">
-                <h1>Login</h1>
-                <!-- Include JS File Here -->
-
-
-                <div class="login">
-
-                    <input type="text" placeholder="Username" id="username">
-                    <input type="password" placeholder="password" id="password">
-                    <!--<a href="#" class="forgot">forgot password?</a>-->
-                    <!--<input type="submit" value="Sign In">-->
-                    <input type="button" value="Login" id="submit" onclick="validate()"/>
-                </div>
-                <div class="shadow"></div>
-            </div>
-            <div id="about_content" class="content hide">
-                <h1>About</h1>
-                <!-- Modal -->
-                <div id="aboutModal" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
-
-                        <!-- Modal content-->
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Modal Header</h4>
-                            </div>
-                            <div class="modal-body">
-                                <p>Some text in the modal.</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            </div>
+                    <h4> Monster Number </h4>
+                    <div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                                   value="option1">
+                            <label class="form-check-label" for="inlineRadio1">1</label>
                         </div>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                                   value="option2">
+                            <label class="form-check-label" for="inlineRadio2">2</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
+                                   value="option3">
+                            <label class="form-check-label" for="inlineRadio3">3</label>
+                        </div>
+                    </div>
+
+                </form>
+                <button id="btn_game_test" onclick="Start()">New Game</button>
+                <button id="btn_random_settings" onclick="set_random_settings()">Set Random</button>
+            </div>
+            <div id="game" class="content hide">
+                <table>
+                    <tr>
+                        <td style="width:12%;">
+                            <div id="game_details">
+                                <table>
+                                    <tr>
+                                        <td id="player_name">
+                                            PLAYER:
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            LIVES
+                                        </td>
+                                        <td id="lives">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            SCORE
+                                        </td>
+                                        <td>
+                                            <input id="lblScore" type="text" style="display: inline-block"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            TIME
+                                        </td>
+                                        <td>
+                                            <input id="lblTime" type="text" style="display: inline-block"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td>
+                            <div id="game_board">
+                                <img id="arcade_machine" src="files/2-fixed.png" alt="arcade_machine">
+                                <div class="onArcadeMachine">
+                                    <button type="button" id="btn_new_game" class="btn btn-primary"
+                                            onclick="newGameBtnClicked()">New Game
+                                    </button>
+                                    <div id="sound_div">
+                                        <video id="music_video">
+                                            <source src="files/output.mp4" type="video/mp4">
+                                        </video>
+                                        <!--<button type="button" id="mute_music" onclick="muteMusic()">Mute</button>-->
+                                        <!--<img id="img_music_muted" class="sound_content" src="files/music_static_pic.png">-->
+                                    </div>
+                                    <canvas id="canvas" height="407" width="530"></canvas>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="login_content" class="content hide">
+            <h1>Login</h1>
+            <!-- Include JS File Here -->
+
+
+            <div class="login">
+
+                <input type="text" placeholder="Username" id="username">
+                <input type="password" placeholder="password" id="password">
+                <!--<a href="#" class="forgot">forgot password?</a>-->
+                <!--<input type="submit" value="Sign In">-->
+                <input type="button" value="Login" id="submit" onclick="validate()"/>
+            </div>
+            <div class="shadow"></div>
+        </div>
+        <div id="about_content" class="content hide">
+            <h1>About</h1>
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 style="float: left">About Us</h2>
+                        <span class="close">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <h3>We Are</h3>
+                        <p>Harel Sasson | 302908256 <br>
+                            Nadav Bar-David | 305446866</p>
+                        <h3>jQuery Plugin</h3>
+                        <p>
+
+                        </p>
+                        <h3>Key difficulty points</h3>
+                        <p>The work was fascinating and instructive <br>
+                            Most of the difficulties were in the initial stage in which learning and acquisition of the
+                            programming language took place. <br>
+                            Later on, we invested a lot of time in positioning and formatting elements displayed on
+                            pages using CSS language functionality.</p>
+
 
                     </div>
                 </div>
+
             </div>
-            </div>
+        </div>
+    </div>
 </section>
 
 <section class="footer">
 
 </section>
-
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
