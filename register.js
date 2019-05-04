@@ -1,22 +1,17 @@
 
 
-
-var dict = [];
-
-
-function init() {
-   //Empty array
-    var user ={
-        userName: "a" ,
-        pass : "a" ,
-        name: "" ,
-        email: "" ,
-        date : ""
-    };
-    dict.push(user);
-}
-window.onload = init;
-
+let user ={
+    userName: "a" ,
+    pass : "a" ,
+    name: "" ,
+    email: "" ,
+    date : ""
+};
+let dict = [];
+dict.push(user);
+if (localStorage.getItem("users") === null)
+    window.localStorage.setItem("users", JSON.stringify(dict));
+// dict = [];
 
 
 function register (name , username , name , email , date){
@@ -27,11 +22,13 @@ function register (name , username , name , email , date){
         email: email ,
         date : date
     };
+    let dict = JSON.parse(window.localStorage.getItem("users"))
     dict.push(user_reg);
+    window.localStorage.setItem("users", JSON.stringify(dict));
 }
 
 function isRegistered( name ,  pass){
-
+    let dict = JSON.parse(window.localStorage.getItem("users"))
     for( let i=0; i<dict.length; i+=1 ) {
         //var value = dict[key];
         if ( dict[i].userName=== name && dict[i].pass === pass ) // user exist
@@ -44,13 +41,11 @@ function isRegistered( name ,  pass){
 }
 
 function Registered( name ){
-
+    let dict = JSON.parse(window.localStorage.getItem("users"))
     for( let i=0; i<dict.length; i+=1 ) {
         //var value = dict[key];
         if ( dict[i].userName=== name  ) // user exist
             return true;
-
-
     }
     return false ; // not found
 
