@@ -15,6 +15,7 @@
 
     <title>Pacman Game</title>
 
+
 </head>
 
 <body>
@@ -90,16 +91,20 @@
                     <input type="text" placeholder="Enter Email" id="email_field" name="email" required>
                     <span class="error">This field is required</span>
 
-                    <label for="date"><b>Date</b></label>
-                    <select type="day" name="day" required>
-                        <option value="month">Day</option>
-                    </select>
-                    <select type="month" name="month" required>
-                        <option value="month">Month</option>
-                    </select>
-                    <select type="year" name="year" required>
-                        <option value="year">Year</option>
-                    </select>
+                    <!--<label for="date"><b>Date</b></label>-->
+                    <!--<select type="day" name="day" required>-->
+                        <!--<option value="month">Day</option>-->
+                    <!--</select>-->
+                    <!--<select type="month" name="month" required>-->
+                        <!--<option value="month">Month</option>-->
+                    <!--</select>-->
+                    <!--<select type="year" name="year" required>-->
+                        <!--<option value="year">Year</option>-->
+                    <!--</select>-->
+                    <labelx for="start">Start date:</labelx>
+                    <input type="date" id="start" name="trip-start"
+                           value="2019-05-05"
+                           min="1900-01-01" max="2019-01-01">
 
 
                     <hr>
@@ -332,7 +337,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.1/bootstrap-slider.min.js"></script>
 <script src="game.js"></script>
 <script src="navigation.js"></script>
-<script src="register.js">init()</script>
+<script src="register.js"></script>
 <script src="login.js"></script>
 <script src="settings.js"></script>
 </body>

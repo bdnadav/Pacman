@@ -1,20 +1,21 @@
-// var name = "a"
-// var pass =  "a"
 
-//var dict = new Object();
-var dict = [] ;
-var user ={
-    userName: "a" ,
-    pass : "a" ,
-    name: "" ,
-    email: "" ,
-    date : ""
-};
-dict.push(user);
-function init () {
-    // dict["a"] = "a" ;
-    // dict.push(user);
+
+
+var dict = [];
+
+
+function init() {
+   //Empty array
+    var user ={
+        userName: "a" ,
+        pass : "a" ,
+        name: "" ,
+        email: "" ,
+        date : ""
+    };
+    dict.push(user);
 }
+window.onload = init;
 
 
 
@@ -34,6 +35,19 @@ function isRegistered( name ,  pass){
     for( let i=0; i<dict.length; i+=1 ) {
         //var value = dict[key];
         if ( dict[i].userName=== name && dict[i].pass === pass ) // user exist
+            return true;
+
+
+    }
+    return false ; // not found
+
+}
+
+function Registered( name ){
+
+    for( let i=0; i<dict.length; i+=1 ) {
+        //var value = dict[key];
+        if ( dict[i].userName=== name  ) // user exist
             return true;
 
 
@@ -65,7 +79,7 @@ $(document).ready(function() {
         var re =   /^[a-zA-Z0-9]+$/ ;
         var is_usr_name_valid=re.test(input.val());
         var is_usr_name=input.val();
-        if(is_usr_name && is_usr_name_valid){
+        if(is_usr_name && is_usr_name_valid && !Registered(input.val())){
             input.removeClass("invalid").addClass("valid");
         }
         else{input.removeClass("valid").addClass("invalid");}
@@ -106,6 +120,13 @@ $(document).ready(function() {
         else{input.removeClass("valid").addClass("invalid");}
     });
 
+    $('#date_field').on('input', function() {
+        var input=$(this);
+        // var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        // var is_date =re.test(input.val());
+        input.removeClass("invalid").addClass("valid");
+    });
+
     $("#register_btn button").click(function(event){
         var form_data=$("#reg_contact").serializeArray();
         var error_free=true;
@@ -118,6 +139,7 @@ $(document).ready(function() {
         }
         if (!error_free){
             event.preventDefault();
+            alert('error: Form will not  be submitted');
         }
         else{
             alert('No errors: Form will be submitted');

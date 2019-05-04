@@ -342,3 +342,16 @@ input.valid, textarea.valid{
     height: 100%;
     background-size: auto;
 }
+label {
+    display: block;
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+input,
+label {
+    margin: .4rem 0;
+}
+
+.note {
+    font-size: .8em;
+}
