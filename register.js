@@ -128,6 +128,7 @@ $(document).ready(function() {
         for (var input in form_data){
             var element=$("#"+ form_data[input]['name'] + "_field");
             var valid=element.hasClass("valid");
+            if (  form_data[input]['name'] == "date") valid = true ;
             var error_element=$("span", element.parent());
             if (!valid){error_element.removeClass("error").addClass("error_show"); error_free=false;}
             else{error_element.removeClass("error_show").addClass("error");}
