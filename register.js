@@ -27,11 +27,12 @@ function register (name , username , name , email , date){
         email: email ,
         date : date
     };
+    //localStorage.setItem(1, user_reg);
     dict.push(user_reg);
 }
 
 function isRegistered( name ,  pass){
-
+    let k = localStorage.get(1);
     for( let i=0; i<dict.length; i+=1 ) {
         //var value = dict[key];
         if ( dict[i].userName=== name && dict[i].pass === pass ) // user exist
@@ -133,6 +134,7 @@ $(document).ready(function() {
         for (var input in form_data){
             var element=$("#"+ form_data[input]['name'] + "_field");
             var valid=element.hasClass("valid");
+            if (  form_data[input]['name'] == "date") valid = true ;
             var error_element=$("span", element.parent());
             if (!valid){error_element.removeClass("error").addClass("error_show"); error_free=false;}
             else{error_element.removeClass("error_show").addClass("error");}
