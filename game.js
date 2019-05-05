@@ -226,8 +226,10 @@ function initNewRound() {
     while (characterInCell(emptyCell[0], emptyCell[1]))
         emptyCell = findRandomEmptyCell(board);
     setFemalePacmanInitPosition();
-    shape.directionX = emptyCell[0];
-    shape.directionY = emptyCell[1];
+    board[shape.i][shape.j] = 0;
+    board[emptyCell[0]][emptyCell[1]] = 5;
+    shape.i = emptyCell[0];
+    shape.j = emptyCell[1];
     Draw();
     addEventListener('keydown', startRound);
 }
