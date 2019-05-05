@@ -14,11 +14,12 @@ if (localStorage.getItem("users") === null)
 // dict = [];
 
 
-function register (name , username , name , email , date){
+function register (username , pass , name , lname, email , date ){
     let user_reg ={
-        userName: name,
-        pass : username ,
+        userName: username,
+        pass : pass ,
         name: name ,
+        lname: lname ,
         email: email ,
         date : date
     };
