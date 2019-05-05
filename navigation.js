@@ -4,6 +4,7 @@ $(".nav-item").on("click", function () {
     newContent = newContent.replace(/\s/g, '');
     if (newContent == "play_content" && "not Logged" == loggedUser) { // move to login
         alert("Please log in first :) ")
+        let oldContent = $(".content.show").attr("id");
         $(".content.show").attr("class", "content hide");
         let con = document.getElementById("login_content");
         //$(".active").removeClass("active");
@@ -11,6 +12,16 @@ $(".nav-item").on("click", function () {
         $("#login_nav").addClass("active");
         con.classList.remove("hide");
         con.classList.add("show");
+
+        if (oldContent == "play_content"){
+            window.clearInterval(interval);
+            window.clearInterval(interval_ghost);
+            $("#play_content h1").css("display", "");
+            $("#settings").css("display", "");
+            $("#game").addClass("hide");
+            // $("#settings").fadeOut(1000, function () {
+            //     $("#game").css("display", "none").removeClass("hide").fadeIn(1000);
+        }
         return;
     }
     $(".active").removeClass("active");

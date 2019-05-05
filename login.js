@@ -9,7 +9,7 @@ function validate(){
     if ( isRegistered(username , password)){
         alert ("Login successfully");
         loggedUser = username;
-        $("#login_txt").html(loggedUser + " Is logged");
+        $("#login_txt").html(loggedUser + " is logged");
         $("#player_name").html("PLAYER:"+loggedUser);
 
         // window.location = "success.html"; // Redirecting to other page.

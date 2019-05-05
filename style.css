@@ -10,6 +10,7 @@ ul.nav {
     color: yellow;
     alignment: center;
 }
+
 .nav li {
     display:inline-block;
     width:10%;

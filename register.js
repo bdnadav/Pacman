@@ -119,8 +119,6 @@ $(document).ready(function() {
 
     $('#date_field').on('input', function() {
         var input=$(this);
-        // var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-        // var is_date =re.test(input.val());
         input.removeClass("invalid").addClass("valid");
     });
 

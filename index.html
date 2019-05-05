@@ -12,7 +12,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script> localStorage.clear()</script>
 
     <title>Pacman Game</title>
@@ -26,7 +25,8 @@
 <section class="header">
     <img id="logo" src="files/logo.jpg">
     <br>
-    <p style="font-family: 'Lobster', sans-serif; color: wheat; line-height: 23px; margin-bottom: 0px">Nadav Bar-David | 305446866<br>Harel Sasson | 302908256</p>
+    <p style="font-family: 'Lobster', sans-serif; color: wheat; line-height: 23px; margin-bottom: 0px">Nadav Bar-David |
+        305446866<br>Harel Sasson | 302908256</p>
 </section>
 <section class="log_show">
     <log id="login_txt" style="margin-left: 1%;">Guest(Not Logged)</log>
@@ -95,13 +95,13 @@
 
                     <!--<label for="date"><b>Date</b></label>-->
                     <!--<select type="day" name="day" required>-->
-                        <!--<option value="month">Day</option>-->
+                    <!--<option value="month">Day</option>-->
                     <!--</select>-->
                     <!--<select type="month" name="month" required>-->
-                        <!--<option value="month">Month</option>-->
+                    <!--<option value="month">Month</option>-->
                     <!--</select>-->
                     <!--<select type="year" name="year" required>-->
-                        <!--<option value="year">Year</option>-->
+                    <!--<option value="year">Year</option>-->
                     <!--</select>-->
                     <label for="date_field"><b>Birth date:</b></label>
                     <input type="date" id="date_field" name="date"
@@ -255,7 +255,34 @@
                                             <input id="lblTime" type="text" style="display: inline-block"/>
                                         </td>
                                     </tr>
+                                    <tr>
+
+                                    </tr>
                                 </table>
+                                <div id="pointsDic">
+                                    <table style="width:100%; border: darkblue">
+                                        <tr>
+                                            <th>Type</th>
+                                            <th>Color</th>
+                                            <th>Points</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Junk</td>
+                                            <td id="junk_color_dic"></td>
+                                            <td>5</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Solid</td>
+                                            <td id="solid_color_dic"></td>
+                                            <td>15</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Prem</td>
+                                            <td id="premium_color_dic"></td>
+                                            <td>25</td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
                         </td>
                         <td>
@@ -311,8 +338,9 @@
                         <p>Harel Sasson | 302908256 <br>
                             Nadav Bar-David | 305446866</p>
                         <h3>jQuery Plugin</h3>
-                        <p>
-
+                        <p> jQuery Forms <br>
+                            jQuery Validation<br>
+                            jQuery Ajax tools
                         </p>
                         <h3>Key difficulty points</h3>
                         <p>The work was fascinating and instructive <br>

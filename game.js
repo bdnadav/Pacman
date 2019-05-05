@@ -43,6 +43,23 @@ var max_points;
 var last_move = "right";
 document.getElementById("music_video").loop = true;
 
+$("#music_video").on("click", function () {
+        if ($("#music_video").get(0).paused)
+            $("#music_video").get(0).play();
+        else
+            $("#music_video").get(0).pause();
+    }
+);
+
+
+
+window.addEventListener("keydown", function (e) {
+    // space and arrow keys
+    if ([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+        e.preventDefault();
+    }
+}, false);
+
 
 $("#input_amount_soup_nuts").on("keydown", function () {
     alert("Please use the arrows to select a number between 50 to 90");
@@ -67,10 +84,11 @@ function newGameBtnClicked() {
 function Start() {
     let res = settingsAreValid();
     if (res !== 6) { // fix to switch cases (error types)
-        alert("Input invalid. Error: " + res);
+        alert("ERROR!!! \n" + res);
         return;
     } else {
         alert("All good lets start");
+        $("#play_content h1").css("display", "none");
         $("#settings").fadeOut(1000, function () {
             $("#game").css("display", "none").removeClass("hide").fadeIn(1000);
         })
@@ -205,7 +223,6 @@ function initNewRound() {
     ghosts[2].directionX = 13;
     ghosts[2].directionY = 0;
     let emptyCell = findRandomEmptyCell(board);
-    // while (characterInCell(emptyCell[0], emptyCell[1]) || ((emptyCell[0] == 0 && (emptyCell[1] == 1 || emptyCell[1] == 12)) || (emptyCell[1] == 13 && emptyCell[0] == )) )
     while (characterInCell(emptyCell[0], emptyCell[1]))
         emptyCell = findRandomEmptyCell(board);
     setFemalePacmanInitPosition();
@@ -300,24 +317,30 @@ function drawGhosts() {
 
 function drawPacman(center) {
     context.beginPath();
-    if (eating) {
-        context.arc(center.x, center.y, 12.5, 0, 1.9 * Math.PI); // half circle - up
-    } else {
-        switch (last_move) {
-            case "up":
-                context.arc(center.x, center.y, 12.5, 1.65 * Math.PI, 1.35 * Math.PI); // half circle - up
-                break;
-            case "right":
-                context.arc(center.x, center.y, 12.5, 0.15 * Math.PI, 1.85 * Math.PI); // half circle - right
-                break;
-            case "down":
-                context.arc(center.x, center.y, 12.5, 0.65 * Math.PI, 0.35 * Math.PI); // half circle - down
-                break;
-            case "left":
-                context.arc(center.x, center.y, 12.5, 1.15 * Math.PI, 0.85 * Math.PI); // half circle - left
-                break;
-        }
+    switch (last_move) {
+        case "up":
+            if (eating)
+                context.arc(center.x, center.y, 12.5, 0, 1.9 * Math.PI); // half circle - up
+            context.arc(center.x, center.y, 12.5, 1.65 * Math.PI, 1.35 * Math.PI); // half circle - up
+            break;
+        case "right":
+            if (eating)
+                context.arc(center.x, center.y, 12.5, 0, 1.9 * Math.PI); // half circle - up
+            context.arc(center.x, center.y, 12.5, 0.15 * Math.PI, 1.85 * Math.PI); // half circle - right
+            break;
+        case "down":
+            if (eating)
+                context.arc(center.x, center.y, 12.5, 0, 1.9 * Math.PI); // half circle - up
+            context.arc(center.x, center.y, 12.5, 0.65 * Math.PI, 0.35 * Math.PI); // half circle - down
+            break;
+        case "left":
+            if (eating)
+                context.arc(center.x, center.y, 12.5, 0, 1.9 * Math.PI); // half circle - up
+            context.arc(center.x, center.y, 12.5, 1.15 * Math.PI, 0.85 * Math.PI); // half circle - left
+            break;
     }
+
+
     context.lineTo(center.x, center.y);
     context.fillStyle = pac_color; //color
     context.fill();
@@ -340,7 +363,7 @@ function drawPacman(center) {
     context.fill();
 }
 
-function muteMusic(){
+function muteMusic() {
     document.getElementById("music_video").pause();
 }
 
@@ -601,10 +624,9 @@ function UpdatePosition() {
         return;
     }
     if (time_elapsed <= 0) {
-        if (score < 150){
+        if (score < 150) {
             window.alert("You can do better than " + score + " points! You should try again by clicking the 'New Game' button");
-        }
-        else{
+        } else {
             window.alert("We have a Winner!!! you earned " + score + " points!");
         }
         window.clearInterval(interval);
@@ -629,7 +651,6 @@ function UpdatePosition() {
             window.clearInterval(interval);
             window.clearInterval(interval_ghost);
             initNewRound();
-            // resetGame();
             return;
         }
     }
